@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"   xmlns:th="http://www.thymeleaf.org"
+                  xmlns:layout = "http://ultraq.net.nz/thymeleaf/layout"
+                  layout:decorate="layout" >
+<head>
+    <meta charset="UTF-8">
+    <title>Saisir un article</title>
+</head>
+<body>
+        <div layout:fragment="content">
+            <div class="col-md-4 col-xs-8">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Saisir un article</div>
+                    <div class="panel-body">
+                        <form th:action="@{/save}" method="post" >
+                            <div class="form-group">
+                                <label  class="form-label">Marque</label>
+                                <input type="text" class="form-control" name="marque" th:value="${article.marque}">
+                                <span th:errors="${article.marque}"></span>
+                            </div>
+                            <div class="form-group">
+                                <label  class="form-label">Description</label>
+                                <input type="text" class="form-control" name="description" th:value="${article.description}">
+                                <span th:errors="${article.description}"></span>
+                            </div>
+                            <div class="form-group">
+                                <label  class="form-label">Price</label>
+                                <input type="number" class="form-control" name="price" th:value="${article.price}">
+                                <span th:errors="${article.price}"></span>
+                            </div>
+                            <div class="form-group">
+                                <label  class="form-label">Category</label>
+                                <select name="category_id" >
+                                    <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+                                </select>
+<!--                                <span th:errors="${article.category_id}"></span>-->
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+</body>
+</html>
