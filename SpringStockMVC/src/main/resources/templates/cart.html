@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:layout = "http://ultraq.net.nz/thymeleaf/layout"
+                layout:decorate="layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Panier</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1>Votre Panier</h1>
+    <ul>
+          <li  th:each="item : ${cart.items}">
+            Article Id: <span th:text="${item.productId}"></span>
+            Quantité: <span th:text="${item.quantity}"></span>
+            <form th:action="@{/cart/remove}" method="post">
+              <input type="hidden" name="productId" th:value="${item.productId}"/>
+              <button type="submit" >Supprimer</button>
+            </form>
+          </li>
+    </ul>
+  <form th:action="@{/cart/add}" method="post">
+    <input type="number" name="productId" placeholder="Id du produit" required>
+    <button type="submit">Ajouter au panier</button>
+  </form>
+</div>
+</body>
+</html>

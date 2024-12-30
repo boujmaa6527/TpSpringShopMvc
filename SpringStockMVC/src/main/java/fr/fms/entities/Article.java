@@ -15,16 +15,16 @@ import java.io.Serializable;
 @Setter
 public class Article implements Serializable {
 
-    @Getter
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String marque;
     @NotNull
     @Size(min = 10, max = 50)
     private String description;
-    @Setter
+
     @DecimalMin("50")
     private double price;
+    
 
 
     @ManyToOne
@@ -64,9 +64,6 @@ public class Article implements Serializable {
         this.id = id;
     }
 
-    public void setMarque(String marque) {
-        this.marque = marque;
-    }
 
     public double getPrice() {
         return price;
@@ -76,9 +73,11 @@ public class Article implements Serializable {
         this.price = price;
     }
 
-    public String getMarque() {
-        return marque;
+    public void setMarque(String marque) {
+        this.marque = marque;
     }
+
+    public String getMarque() { return marque; }
 
     public Article(String marque, String description, double price, Category category) {
         this.marque = marque;
@@ -86,6 +85,8 @@ public class Article implements Serializable {
         this.price = price;
         this.category = category;
     }
+
+
     public Article(){}
 
     @Override

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"   xmlns:th="http://www.thymeleaf.org"
+                  xmlns:layout = "http://ultraq.net.nz/thymeleaf/layout"
+                  layout:decorate="layout">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Modifier un article</title>
+</head>
+<body>
+      <div  layout:fragment ="content">
+        <div class="col-md-4 col-xs-8">
+          <div class="panel panel-primary">
+            <div class="panel-heading">Modifier un article</div>
+            <div class="panel-body">
+                  <form th:action="@{/save}" method="post" >
+                    <div class="form-group">
+                      <label  class="form-label">Id</label>
+                      <input  readonly type="text" class="form-control" name="id" th:value="${article.id}">
+                    </div>
+
+                    <div class="form-group">
+                      <label  class="form-label">Marque</label>
+                      <input type="text" class="form-control" name="marque" th:value="${article.marque}">
+                    </div>
+
+                    <div class="form-group">
+                      <label  class="form-label">Description</label>
+                      <input type="text" class="form-control" name="description" th:value="${article.description}">
+                    </div>
+
+                    <div class="form-group">
+                      <label  class="form-label">Price</label>
+                      <input type="number" class="form-control" name="price" th:value="${article.price}">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Update article</button>
+                  </form>
+            </div>
+          </div>
+        </div>
+      </div>
+</body>
+</html>

@@ -7,7 +7,7 @@
     <title>Saisir un article</title>
 </head>
 <body>
-        <div layout:fragment="content">
+        <div layout:fragment = "content">
             <div class="col-md-4 col-xs-8">
                 <div class="panel panel-primary">
                     <div class="panel-heading">Saisir un article</div>
@@ -30,7 +30,7 @@
                             </div>
                             <div class="form-group">
                                 <label  class="form-label">Category</label>
-                                <select name="category_id" >
+                                <select name="category_id" id="category" >
                                     <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
                                 </select>
 <!--                                <span th:errors="${article.category_id}"></span>-->

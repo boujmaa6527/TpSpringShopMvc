@@ -32,8 +32,19 @@
             </ul>
         </div>
     </div>
+    <div class="container-fluid" th:each="categorie : ${categories}">
+        <div class="d-flex">
+            <div class="d-flex justify-content-between">
+                <a class="link-underline-dark me-3"  th:href="@{/index(category_id=${categorie.id})}" th:text="${categorie.name}"></a>
+
+            </div>
+        </div>
+
+    </div>
 </nav>
+
   <section layout:fragment="content"></section>
+
 
 </body>
 </html>
