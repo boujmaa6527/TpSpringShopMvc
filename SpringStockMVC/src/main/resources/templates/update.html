@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html lang="en"   xmlns:th="http://www.thymeleaf.org"
-                  xmlns:layout = "http://ultraq.net.nz/thymeleaf/layout"
-                  layout:decorate="layout">
-
+<html xmlns:th= "http://thymeleaf.org"
+      xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate = "layout"
+      lang="fr"
+>
 <head>
   <meta charset="UTF-8">
-  <title>Modifier un article</title>
+  <title>Mes articles</title>
+  <link rel="stylesheet" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
 </head>
 <body>
-      <div  layout:fragment ="content">
+    <div layout:fragment="content">
         <div class="col-md-4 col-xs-8">
           <div class="panel panel-primary">
             <div class="panel-heading">Modifier un article</div>
@@ -18,22 +20,26 @@
                       <label  class="form-label">Id</label>
                       <input  readonly type="text" class="form-control" name="id" th:value="${article.id}">
                     </div>
-
                     <div class="form-group">
                       <label  class="form-label">Marque</label>
                       <input type="text" class="form-control" name="marque" th:value="${article.marque}">
+                      <span  th:errors="${article.marque}" class="text-danger"></span>
                     </div>
-
                     <div class="form-group">
                       <label  class="form-label">Description</label>
                       <input type="text" class="form-control" name="description" th:value="${article.description}">
+                      <span th:errors="${article.description}" class="text-danger"></span>
                     </div>
-
                     <div class="form-group">
                       <label  class="form-label">Price</label>
                       <input type="number" class="form-control" name="price" th:value="${article.price}">
+                      <span th:errors="${article.price}" class="text-danger"></span>
                     </div>
-
+                    <div class="form-group">
+                      <select name="category">
+                        <option th:each="category : ${categories}"  th:value="${category.id}" th:text="${category.name}"></option>
+                      </select>
+                    </div>
                     <button type="submit" class="btn btn-primary">Update article</button>
                   </form>
             </div>

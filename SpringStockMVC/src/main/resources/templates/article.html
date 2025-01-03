@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html lang="en"   xmlns:th="http://www.thymeleaf.org"
-                  xmlns:layout = "http://ultraq.net.nz/thymeleaf/layout"
-                  layout:decorate="layout" >
+<html xmlns:th= "http://thymeleaf.org"
+      xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate = "layout"
+      lang="fr"
+>
 <head>
     <meta charset="UTF-8">
-    <title>Saisir un article</title>
+    <title>Mes articles</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
 </head>
 <body>
-        <div layout:fragment = "content">
+<div layout:fragment="content">
             <div class="col-md-4 col-xs-8">
                 <div class="panel panel-primary">
                     <div class="panel-heading">Saisir un article</div>
@@ -30,8 +33,8 @@
                             </div>
                             <div class="form-group">
                                 <label  class="form-label">Category</label>
-                                <select name="category_id" id="category" >
-                                    <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+                                <select name="category">
+                                    <option th:each="category : ${categories}"  th:value="${category.id}" th:text="${category.name}"></option>
                                 </select>
 <!--                                <span th:errors="${article.category_id}"></span>-->
                             </div>

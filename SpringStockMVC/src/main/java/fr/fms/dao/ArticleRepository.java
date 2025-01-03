@@ -15,6 +15,8 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
              //List<Article> findAll();
              Page<Article> findByDescriptionContains(Pageable pageable, String descrption);
 
+             Page<Article> findByCategoryId(Long category_id, String kw, Pageable pageable);
+
              //@Query("select A from Article A  WHERE A.category  = :category_id")
              Page<Article> findByCategoryId(Long category_id, Pageable pageable);
 
