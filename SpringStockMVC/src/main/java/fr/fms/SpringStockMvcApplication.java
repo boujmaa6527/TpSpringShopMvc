@@ -42,12 +42,12 @@ public class SpringStockMvcApplication implements CommandLineRunner {
 //
 //
 //		articleRepository.save(new Article( "Samsung ", "S10" ,250, smartphone));
-//		articleRepository.save(new Article( "Samsung ", "S9" ,350, smartphone));
+//		articleRepository.save(new Article( "Samsung ", "S9" ,350,smartphone));
 //		articleRepository.save(new Article( "Xiaomi ", "MI12" ,350, smartphone));
-//		articleRepository.save(new Article( "Apple ", "Iphone142" ,950, smartphone));
-//		articleRepository.save(new Article( "Apple ", "Iphone2047" ,1999, smartphone));
+//		articleRepository.save(new Article( "Apple ", "Iphone142", 950,smartphone));
+//		articleRepository.save(new Article( "Apple ", "Iphone2047",1999, smartphone));
 //
-//		articleRepository.save(new Article("hp ", "EliteBook", 650, Ordinateur));
+//		articleRepository.save(new Article("hp ", "EliteBook", 650,Ordinateur));
 //		articleRepository.save(new Article("Asus ", "R512", 980, Ordinateur));
 //		articleRepository.save(new Article("Toshiba ", "Ma1452", 650, Ordinateur));
 //		articleRepository.save(new Article("Apple ", "Mac251", 1000, Ordinateur));

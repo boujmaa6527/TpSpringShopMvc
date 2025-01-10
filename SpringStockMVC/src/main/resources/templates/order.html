@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th= "http://thymeleaf.org"
+      xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate = "layout"
+      lang="fr"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Mes Informations</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<div layout:fragment="content">
+
+            <div class="container col-md-6 marge">
+                <div class="panel panel-default">
+                    <div class="panel-heading" > Saisissez les informations</div>
+                    <div class="panel-body">
+                        <form th:action="@{/porder}" method="post">
+                            <div class="form-group">
+                                <label  class="form-label">Nom: </label>
+                                <input type="text" class="form-control" name="name" th:value="${customer.name}">
+                                <span th:errors="${customer.name}"></span>
+                            </div>
+                            <div class="form-group">
+                                <label  class="form-label">Prénom: </label>
+                                <input type="text" class="form-control" name="sname" th:value="${customer.sname}">
+                                <span th:errors="${customer.sname}"></span>
+                            </div>
+                            <div class="form-group">
+                                <label  class="form-label">Email: </label>
+                                <input type="text" class="form-control" name="email" th:value="${customer.email}">
+                                <span th:errors="${customer.email}"></span>
+                            </div>
+                            <div class="form-group">
+                                <label  class="form-label">Adresse: </label>
+                                <input type="text" class="form-control" name="adresse" th:value="${customer.adresse}">
+                                <span th:errors="${customer.adresse}"></span>
+                            </div>
+                            <div class="form-group">
+                                <label  class="form-label">Phone: </label>
+                                <input type="text" class="form-control" name="phone" th:value="${customer.phone}">
+                                <span th:errors="${customer.phone}"></span>
+                            </div>
+                            <button type="submit" class="btn btn-success">Ajouter</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+</div>
+</body>
+</html>

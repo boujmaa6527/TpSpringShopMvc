@@ -1,28 +1,46 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-                xmlns:layout = "http://ultraq.net.nz/thymeleaf/layout"
-                layout:decorate="layout">
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate ="~{layout}"
+      lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Panier</title>
+  <meta charset="UTF-8">
+  <title>Mes articles</title>
+  <link rel="stylesheet" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
 </head>
 <body>
-<div layout:fragment="content">
-    <h1>Votre Panier</h1>
-    <ul>
-          <li  th:each="item : ${cart.items}">
-            Article Id: <span th:text="${item.productId}"></span>
-            Quantité: <span th:text="${item.quantity}"></span>
-            <form th:action="@{/cart/remove}" method="post">
-              <input type="hidden" name="productId" th:value="${item.productId}"/>
-              <button type="submit" >Supprimer</button>
-            </form>
-          </li>
-    </ul>
-  <form th:action="@{/cart/add}" method="post">
-    <input type="number" name="productId" placeholder="Id du produit" required>
-    <button type="submit">Ajouter au panier</button>
-  </form>
-</div>
+    <div layout:fragment="content">
+
+      <div class="container col-md-6 marge">
+        <div class="panel panel-primary" th:if="${nbArt > 0}">
+          <div class="panel-heading">List des articles</div>
+          <div class="panel-body">
+            <table class="table">
+              <tr>
+                <th>Id</th><th>Marque</th><th>Description</th><th>Price</th><th>Quantity</th>
+              </tr>
+              <tr th:each="a : ${cart}">
+                <td th:text="${a.id}"></td>
+                <td th:text="${a.brand}"></td>
+                <td th:text="${a.description}"></td>
+                <td th:text="${a.price}"></td>
+                <td th:text="${a.quantity}"></td>
+
+                <td>
+                  <a class="btn btn-danger" th:href="@{/dcart(id=${a.id})}">Supprimer</a>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4" class="text-right"><strong>Montant Total:</strong></td>
+                <td th:text="${total}"></td>
+              </tr>
+            </table>
+            <a class="btn btn-primary" th:href="@{/order}">Commander</a>
+          </div>
+        </div>
+        <div th:if="${nbArt == 0}">PANIER VIDE</div>
+      </div>
+    </div>
+
 </body>
 </html>

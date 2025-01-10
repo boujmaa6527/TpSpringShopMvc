@@ -20,13 +20,15 @@ public class Article implements Serializable {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String marque;
+    private String brand;
     @NotNull
     @Size(min = 1, max = 51)
     private String description;
 
     @DecimalMin("50")
     private double price;
+
+    private int quantity = 1;
     
     @ManyToOne
     private Category category;

@@ -20,19 +20,16 @@
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/article}">Add New Article</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/vcart}">
+                        <span th:text="${nbCart}"></span>Panier
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
-    <div class= "container">
-        <nav>
-            <div class="d-flex flex-wrap">
-                <div  th:each="categorie : ${categories}" class="me-3" style="flex:1 1 auto;max-width: 500px;">
-                    <a class="link-underline-dark"  th:href="@{/index(category_id=${categorie.id})}" th:text="${categorie.name}"></a>
-                </div>
-            </div>
-        </nav>
-    </div>
+
 <section layout:fragment="content"></section>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package fr.fms.web;
 
+import fr.fms.Business.IBusinessImpl;
 import fr.fms.dao.ArticleRepository;
 import fr.fms.dao.CategoryRepository;
 import fr.fms.entities.Article;
@@ -20,6 +21,8 @@ import java.util.Optional;
 public class ArticleController {
 
     @Autowired
+    IBusinessImpl businessImpl; 
+    @Autowired
     ArticleRepository articleRepository;
     @Autowired
     CategoryRepository categoryRepository;
@@ -27,9 +30,11 @@ public class ArticleController {
         @GetMapping("/index")
         public String index(Model model, @RequestParam(name="page", defaultValue = "0" )int page,
                                          @RequestParam(name= "keyword", defaultValue = "") String kw,
-                                         @RequestParam(name = "category_id", defaultValue = "0") Long category_id){
+                                         @RequestParam(name = "nbCart", defaultValue = "0") int cart,
+                                         @RequestParam(name = "category_id", defaultValue = "0") Long category_id,
+                                         @ModelAttribute(name = "error") String error) throws Exception {
              //Page<Article> articles = articleRepository.findAll(PageRequest.of(page, 5));
-            Page<Article> articles;
+            Page<Article> articles = null;
             Page<Article> articleByCategorie = null;
             
             //List<Category> categories = categoryRepository.findAll();
@@ -37,23 +42,29 @@ public class ArticleController {
                 if(category_id > 0) {
 
                     Optional<Category> categoryToDisplay = categoryRepository.findById(category_id);
-                    if(categoryToDisplay.isPresent()){
-                        articles = articleRepository.findByDescriptionContains(PageRequest.of(page, 5), kw);
+                    articles = businessImpl.getArticlesByCategoriePage(category_id, page);
+                    if(articles.isEmpty()){
+                        //model.addAttribute("error", ManageErrors.STR_ERROR);
+                    }else{
+                        articles = businessImpl.getArticlesPages(kw, page);
+                    }
+                  //  if(categoryToDisplay.isPresent()){
+                        articles = businessImpl.getArticlesByCategoriePage(category_id,page);
                         Category category = categoryToDisplay.get();
                         System.out.println("category id :" + category.getId());
 
-                        articleByCategorie = articleRepository.findByCategoryId(category.getId(),PageRequest.of(page, 5));
+                    articleByCategorie = businessImpl.getArticlesByCategoriePage(category.getId(), page);
                         System.out.println("Article found: " + articleByCategorie.getTotalElements());
-                    }else{
-                        articles = Page.empty();
-                        System.out.println("Category not found" + category_id);
-                    }
+////                    }else{
+////                        articles = Page.empty();
+////                        System.out.println("Category not found" + category_id);
+//                    }
                 }else{
                     articles = articleRepository.findByDescriptionContains(PageRequest.of(page, 5), kw);
                     System.out.println("id not null");
             }
 
-            List<Category> categories = categoryRepository.findAll();
+            List<Category> categories = businessImpl.getCategories();
 
             model.addAttribute("listArticle", articles.getContent());
 
@@ -63,9 +74,10 @@ public class ArticleController {
 
             model.addAttribute("keyword", kw);
 
-            model.addAttribute("categories", categories);
+            model.addAttribute("categories", businessImpl.getCategories());
 
             model.addAttribute("category_id", category_id);
+            model.addAttribute("nbcart", businessImpl.getNbCart());
 
             if(category_id > 0 && articleByCategorie != null) {
                 model.addAttribute("articleByCategorie", articleByCategorie.getContent());
@@ -101,7 +113,8 @@ public class ArticleController {
 
             if(bindingResult.hasErrors()) {
                 System.out.println("Validation error" + bindingResult.getAllErrors());
-                return "update";
+                //return "update";
+                return "article";
             }
             articleRepository.save(article);
             System.out.println(article);
